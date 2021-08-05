@@ -1,0 +1,90 @@
+---
+title: "Data_import"
+author: "Elena"
+date: "2021/7/26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Categorize the datasets
+
+After I've got the zip file with eighteen csv files, I browsed them all to get the knowledge of what they're all about. 
+And I decided to categorize them first and filter out the datasets that I might not use.
+All datasets are in the long format for the convenience of analysis and consistency.
+
+## Load the necessary packages 
+
+```{r}
+library('tidyverse')
+library('tidyr')
+library("readr")
+library('here')
+```
+
+After some browsing though those datasets in the zip file, I decided to sort them out into four categories based on what the observation is about in the datasets, which are Calories, Intensity, Sleep, Steps.
+And there are two other files that don't belong to the categories above but are relevant to our analysis, which are *dailyActivity_merged.csv* and *weightLogInfo_merged.csv*.
+
+## Import the relevant datasets into Rstudio.
+
+### Category : Calories
+
+Import the two datasets with mearsurement of calories burned by the fitbit users into Rstudio.
+(The *minuteCaloriesNarrow_merged.csv* is left out because our analysis probably won't need this data to the precision of minute.)
+
+```{r}
+calories_hourly <- read.csv("Calories/hourlyCalories_merged.csv")
+calories_daily <- read.csv("Calories/dailyCalories_merged.csv")
+calories_daily <- as.data.frame(calories_daily)
+calories_hourly <- as.data.frame(calories_hourly)
+```
+
+### Category : Intensity
+
+Import the two datasets with mearsurement of intensity of activities of the fitbit users into Rstudio.
+(The *minuteIntensitiesNarrow_merged.csv* is left out because our analysis probably won't need this data to the precision of minute.)
+*A MET is a ratio of your working metabolic rate relative to your resting metabolic rate. Metabolic rate is the rate of energy expended per unit of time. It’s one way to describe the intensity of an exercise or activity.*
+
+```{r}
+intensity_daily <- as.data.frame(read.csv("Intensity/dailyIntensities_merged.csv"))
+intensity_hourly <- as.data.frame(read.csv("Intensity/hourlyIntensities_merged.csv"))
+MET_minute <- as.data.frame(read.csv("Intensity/minuteMETsNarrow_merged.csv"))
+```
+
+### Category : Sleep
+
+Import the two datasets with sleep data the fitbit users into Rstudio.
+
+```{r}
+sleep_minute <- as.data.frame(read.csv("Sleep/minuteSleep_merged.csv"))
+sleep_daily <- as.data.frame(read.csv("Sleep/sleepDay_merged.csv"))
+```
+
+### Category : Steps
+
+Import the two datasets with mearsurement of steps taken by the fitbit users into Rstudio.
+(The *minuteStepsNarrow_merged.csv* is left out because our analysis probably won't need this data to the precision of minute.)
+
+```{r}
+steps_daily <- as.data.frame(read.csv("Steps/dailySteps_merged.csv"))
+steps_hourly <- as.data.frame(read.csv("Steps/hourlySteps_merged.csv"))
+```
+
+### Category : Others
+
+Import two other datasets about the user information and their daily activity information into Rstudio.
+These two datasets don't belong to any catogery above but are relevant to our study.'
+
+```{r}
+daily_activities <- as.data.frame(read.csv("dailyActivity_merged.csv"))
+user_info <- as.data.frame(read.csv("weightLogInfo_merged.csv"))
+```
+
+
+
+
+
+
+
+
